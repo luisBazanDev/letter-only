@@ -37,7 +37,7 @@ client.resolveGuildDb = async (guild_id) => {
     guildDb = new Guilds({
       guild_id,
     });
-    guildDb.save();
+    await guildDb.save();
   }
   return guildDb;
 };

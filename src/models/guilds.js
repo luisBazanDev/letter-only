@@ -14,6 +14,22 @@ const Guild = new Mongoose.Schema({
     type: String,
     default: null,
   },
+  membersMuted: {
+    type: Array,
+    default: [],
+  },
+  state: {
+    type: Boolean,
+    default: false
+  },
+  start_time: {
+    type: Date,
+    default: null
+  },
+  end_time: {
+    type: Date,
+    default: null
+  },
 })
 
 module.exports = Mongoose.model('Guilds', Guild)

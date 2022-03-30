@@ -21,12 +21,13 @@ module.exports = {
     }
   ],
   run: async (client, lang, interaction, options) => {
-    const guildDb = client.resolveGuildDb(interaction.guild.id)
+    const guildDb = await client.resolveGuildDb(interaction.guild.id)
     const cmdLang = lang.commands.language
     guildDb.language = options[0].value;
     interaction.reply({
       content: cmdLang+'`'+options[0].value+'`',
       ephemeral: true
     });
+    guildDb.save();
   }
 }
