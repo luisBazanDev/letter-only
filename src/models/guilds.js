@@ -4,11 +4,11 @@ const Guild = new Mongoose.Schema({
   guild_id: String,
   language: {
     type: String,
-    default: 'EN'
+    default: "EN",
   },
   letter: {
     type: String,
-    default: 's'
+    default: "s",
   },
   muted_role: {
     type: String,
@@ -20,16 +20,16 @@ const Guild = new Mongoose.Schema({
   },
   state: {
     type: Boolean,
-    default: false
+    default: false,
   },
   start_time: {
     type: Date,
-    default: null
+    default: null,
   },
   end_time: {
     type: Date,
-    default: null
+    default: null,
   },
-})
+});
 
-module.exports = Mongoose.model('Guilds', Guild)
+module.exports = Mongoose.model("Guilds", Guild);

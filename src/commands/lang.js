@@ -1,7 +1,7 @@
 module.exports = {
   name: "lang",
   description: "Change the language of the bot.",
-  permissions: ['admin'],
+  permissions: ["admin"],
   options: [
     {
       name: "language",
@@ -11,23 +11,23 @@ module.exports = {
       choices: [
         {
           name: "Español",
-          value: "ES"
+          value: "ES",
         },
         {
           name: "English",
-          value: "EN"
-        }
-      ]
-    }
+          value: "EN",
+        },
+      ],
+    },
   ],
   run: async (client, lang, interaction, options) => {
-    const guildDb = await client.resolveGuildDb(interaction.guild.id)
-    const cmdLang = lang.commands.language
+    const guildDb = await client.resolveGuildDb(interaction.guild.id);
+    const cmdLang = lang.commands.language;
     guildDb.language = options[0].value;
     interaction.reply({
-      content: cmdLang+'`'+options[0].value+'`',
-      ephemeral: true
+      content: cmdLang + "`" + options[0].value + "`",
+      ephemeral: true,
     });
     guildDb.save();
-  }
-}
+  },
+};

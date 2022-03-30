@@ -24,11 +24,15 @@ module.exports = {
     guildDb.letter = options[0].value.toLowerCase();
     interaction.guild.me.setNickname(
       `${process.env.BOT_NAME} | ${options[0].value.toUpperCase()}`,
-      'Letter change.'
-    )
+      "Letter change."
+    );
     interaction.reply({
       content:
-        cmdLang.success.p1 + " `" + options[0].value + "` " + cmdLang.success.p2,
+        cmdLang.success.p1 +
+        " `" +
+        options[0].value +
+        "` " +
+        cmdLang.success.p2,
       ephemeral: true,
     });
     guildDb.save();

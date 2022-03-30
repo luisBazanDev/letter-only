@@ -1,4 +1,4 @@
-const Guilds = require('../models/guilds');
+const Guilds = require("../models/guilds");
 module.exports = {
   name: "guildCreate",
   run: async (client, guild) => {
@@ -11,5 +11,5 @@ module.exports = {
       });
       guildDb.save();
     }
-  }
-}
+  },
+};

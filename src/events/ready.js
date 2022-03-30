@@ -3,14 +3,14 @@ module.exports = {
   run: async (client) => {
     console.log("Bot ready.");
 
-    let commands = client.application?.commands
+    let commands = client.application?.commands;
 
-    client.commands.forEach(cmd => {
+    client.commands.forEach((cmd) => {
       commands.create({
         name: cmd.name,
-        description: cmd.description || 'No description',
-        options: cmd.options || []
-      })
-    })
+        description: cmd.description || "No description",
+        options: cmd.options || [],
+      });
+    });
   },
 };

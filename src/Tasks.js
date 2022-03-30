@@ -9,7 +9,7 @@ async function guilds_state() {
 
   for (let guild of guilds) {
     if (guild.state) {
-      guild = await Guilds({ guild_id: guild.guild_id })
+      guild = await Guilds({ guild_id: guild.guild_id });
       if (guild.end_time < Date.now()) {
         guild.state = false;
         await guild.save();

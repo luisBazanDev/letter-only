@@ -12,7 +12,7 @@ const MembersWarning = new Mongoose.Schema({
   warns: {
     type: Array,
     default: [],
-  }
+  },
 });
 
-module.exports = Mongoose.model('MembersWarns', MembersWarning);
+module.exports = Mongoose.model("MembersWarns", MembersWarning);

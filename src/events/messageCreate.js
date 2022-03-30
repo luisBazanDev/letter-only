@@ -8,15 +8,15 @@ const langs = {
 module.exports = {
   name: "messageCreate",
   run: async (client, msg) => {
-    if (msg.author.id == client.user.id && msg.type == 'DEFAULT') {
+    if (msg.author.id == client.user.id && msg.type == "DEFAULT") {
       setTimeout(() => {
         msg.delete();
       }, 1000 * 5);
       return;
     }
-    if (msg.author.bot || msg.type != 'DEFAULT') return;
+    if (msg.author.bot || msg.type != "DEFAULT") return;
     const guildDb = await client.resolveGuildDb(msg.guild.id);
-    if(!guildDb.state) return;
+    if (!guildDb.state) return;
     const lang = langs[guildDb.language || "EN"];
     const content = msg.content.toLowerCase();
 
