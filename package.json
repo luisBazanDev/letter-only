@@ -1,0 +1,32 @@
+{
+  "name": "s-only",
+  "version": "1.0.0",
+  "description": "It is a discord bot for april's fools",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisBazanDev/s-only.git"
+  },
+  "keywords": [
+    "april's",
+    "fools"
+  ],
+  "author": "Luis Bazán",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisBazanDev/s-only/issues"
+  },
+  "homepage": "https://github.com/luisBazanDev/s-only#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "mongoose": "^6.2.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

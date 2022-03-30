@@ -1,0 +1,28 @@
+{
+  "commands": {
+    "info": {
+      "title": "Bot Information",
+      "description": "Letter Only is a discord bot for april fools day and other fun stuff",
+      "creator": {
+        "title": "Creator and my god",
+        "value": "`🙈 Luis Bazán`"
+      },
+      "created": {
+        "title": "When I was created?",
+        "value": "`🪄 03/22`"
+      },
+      "support": {
+        "title": "Support server?",
+        "value": "[Click Here 🤙]("
+      },
+      "invite": {
+        "title": "Invite me to your server?",
+        "value": "[Click Here 😽]("
+      },
+      "source": {
+        "title": "Source code?",
+        "value": "[My heart 💖]("
+      }
+    }
+  }
+}
