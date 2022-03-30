@@ -6,7 +6,10 @@ const Guild = new Mongoose.Schema({
     type: String,
     default: 'EN'
   },
-  letter: String,
+  letter: {
+    type: String,
+    default: 's'
+  },
   muted_role: {
     type: String,
     default: null,

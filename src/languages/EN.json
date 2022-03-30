@@ -3,13 +3,14 @@
     "info": {
       "title": "Bot Information",
       "description": "Letter Only is a discord bot for april fools day and other fun stuff",
+      "img": "https://static8.depositphotos.com/1431107/1066/i/600/depositphotos_10666044-stock-photo-numbers-buttons.jpg",
       "creator": {
         "title": "Creator and my god",
-        "value": "`🙈 Luis Bazán`"
+        "value": "`Luis Bazán` 🙈"
       },
       "created": {
         "title": "When I was created?",
-        "value": "`🪄 03/22`"
+        "value": "`03/22` 🪄"
       },
       "support": {
         "title": "Support server?",
@@ -23,6 +24,14 @@
         "title": "Source code?",
         "value": "[My heart 💖]("
       }
-    }
+    },
+    "invite": {
+      "title": "Invite me to your server?",
+      "value": "[Click Here 😽]("
+    },
+    "ping": {
+      "title": "🏓 Ping with the Discord API"
+    },
+    "language": "🌐 Change the language "
   }
 }

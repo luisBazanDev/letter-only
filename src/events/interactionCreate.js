@@ -1,4 +1,3 @@
-const Guilds = require('../models/guilds')
 const langs = {
   'ES': require('../languages/ES.json'),
   'EN': require('../languages/EN.json')
@@ -6,16 +5,19 @@ const langs = {
 module.exports = {
   name: 'interactionCreate',
   run: async(client, interaction) => {
-    const lang = langs[Guilds.findOne({ guild_id: interaction.guild.id })?.language || 'EN']
+    const guildDb = client.resolveGuildDb(interaction.guild.id);
+    const lang = langs[guildDb?.language || 'EN']
 
     if(!interaction.isCommand())return;
 
-    const { commandName, options } = interaction;
+    const { commandName, options, member } = interaction;
 
     let cmd = client.commands.get(commandName)
     
     if(!cmd)return;
     
-    cmd.run(client, lang, interaction, options)
+    if(cmd.permissions.includes('admin') && !member.permissions.has('ADMINISTRATOR'))return;
+
+    cmd.run(client, lang, interaction, options._hoistedOptions)
   }
 }
