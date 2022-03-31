@@ -31,7 +31,7 @@ client.commands = new Collection();
 
 client.resolveGuildDb = async (guild_id) => {
   let guildDb = await Guilds.findOne({
-    guild_id,
+    guild_id: guild_id,
   });
   if (!guildDb) {
     guildDb = new Guilds({

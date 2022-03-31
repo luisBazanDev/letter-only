@@ -1,6 +1,6 @@
 module.exports = {
   name: "disable",
-  description: "Disable a system",
+  description: "✂️ Disable a system",
   permissions: ["admin"],
   run: async (client, lang, interaction, options) => {
     const guildDb = await client.resolveGuildDb(interaction.guild.id);

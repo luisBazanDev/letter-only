@@ -1,4 +1,3 @@
-const { GuildMember } = require("discord.js");
 const MemberWarns = require("../models/members_warns");
 const langs = {
   ES: require("../languages/ES.json"),
@@ -20,7 +19,8 @@ module.exports = {
     const lang = langs[guildDb.language || "EN"];
     const content = msg.content.toLowerCase();
 
-    if (content == guildDb.letter.toLowerCase()) return;
+    if (compareMsgLetter(content.toLowerCase(), guildDb.letter.toLowerCase()))
+      return;
 
     msg.delete();
     if (msg.member.permissions.has("ADMINISTRATOR")) return;
@@ -68,4 +68,17 @@ async function warnUser(guild_id, member) {
   memberWarnsDb.warns.push(new Date());
   await memberWarnsDb.save();
   return memberWarnsDb.warns.length;
+}
+
+function compareMsgLetter(msg, letter) {
+  let length = msg.length;
+  if (length > 1) {
+    let prediction = "";
+    for (let i = 0; i < length; i++) {
+      prediction += letter;
+    }
+    if (prediction == msg) return true;
+  } else {
+    if (msg == letter) return true;
+  }
 }

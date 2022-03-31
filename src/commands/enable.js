@@ -1,6 +1,6 @@
 module.exports = {
   name: "enable",
-  description: "Enable a system",
+  description: "🛫 Enable a system",
   permissions: ["admin"],
   options: [
     {

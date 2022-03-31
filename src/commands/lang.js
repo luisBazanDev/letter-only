@@ -1,6 +1,6 @@
 module.exports = {
   name: "lang",
-  description: "Change the language of the bot.",
+  description: "🌐 Change the language of the bot.",
   permissions: ["admin"],
   options: [
     {

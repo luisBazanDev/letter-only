@@ -1,6 +1,6 @@
 module.exports = {
   name: "letter",
-  description: "Change the letter of the bot.",
+  description: "🔠 Change the letter of the bot.",
   permissions: ["admin"],
   options: [
     {
