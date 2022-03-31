@@ -8,7 +8,7 @@
     "info": {
       "title": "Información del bot",
       "description": "Letter Only es un bot de discord para el día de los inocentes y otros momentos divertidos, con tu comunidad.",
-      "img": "https://i.imgur.com/YRWHoVW.jpg",
+      "img": "https://i.imgur.com/f3Oukij.jpg",
       "creator": {
         "title": "Creador y mi dios",
         "value": "`Luis Bazán` 🙈"
@@ -19,20 +19,20 @@
       },
       "support": {
         "title": "Servidor de soporte?",
-        "value": "[Click Here 🤙]("
+        "value": "[Click Aquí 🤙]("
       },
       "invite": {
         "title": "Invítame a tu servidor?",
-        "value": "[Click Here 😽]("
+        "value": "[Click Aquí 😽]("
       },
       "source": {
         "title": "Código fuente?",
-        "value": "[My heart 💖]("
+        "value": "[Mi cocoro 💖]("
       }
     },
     "invite": {
       "title": "Invítame a tu servidor?",
-      "value": "[Click Here 😽]("
+      "value": "[Click Aquí 😽]("
     },
     "ping": {
       "title": "🏓 Retraso con la API de Discord"
