@@ -25,6 +25,9 @@ client.commands = new Collection();
   const CommandsFiles = fs.readdirSync(__dirname + "/commands/");
   for (const commandFile of CommandsFiles) {
     const command = require("./commands/" + commandFile);
+    if (command.load) {
+      command.load(client);
+    }
     client.commands.set(command.name, command);
   }
 })();
