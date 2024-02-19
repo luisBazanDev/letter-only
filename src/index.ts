@@ -3,8 +3,8 @@ dotenv.config();
 
 import client from "./Client";
 import { connect as connectDatabase } from "./DataBase";
-// const tasks = require("./Tasks");
+import { run as RunTasks } from "./Tasks";
 
 connectDatabase();
-// tasks.run();
+RunTasks();
 client.login(process.env.TOKEN ?? "");
