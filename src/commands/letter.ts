@@ -1,7 +1,9 @@
-module.exports = {
+import { Command, CommandPermission } from "../types";
+
+const LetterCommand: Command = {
   name: "letter",
   description: "🔠 Change the letter of the bot.",
-  permissions: ["admin"],
+  permissions: CommandPermission.ADMIN,
   options: [
     {
       name: "letter",
@@ -11,19 +13,22 @@ module.exports = {
     },
   ],
   run: async (client, lang, interaction, options) => {
+    if (!client.resolveGuildDb || !interaction.guild) return;
     const guildDb = await client.resolveGuildDb(interaction.guild.id);
     const cmdLang = lang.commands.letter;
-    if (!options[0].value.match(/^[a-zA-Z]$/) && options[0].value !== "ñ") {
+
+    const letter = typeof options[0].value === "string" ? options[0].value : "";
+
+    if (!letter.match(/^[a-zA-Z]$/) && letter !== "ñ") {
       interaction.reply({
-        content:
-          cmdLang.error.p1 + " `" + options[0].value + "` " + cmdLang.error.p2,
+        content: cmdLang.error.p1 + " `" + letter + "` " + cmdLang.error.p2,
         ephemeral: true,
       });
       return;
     }
-    guildDb.letter = options[0].value.toLowerCase();
-    interaction.guild.me.setNickname(
-      `${process.env.BOT_NAME} | ${options[0].value.toUpperCase()}`,
+    guildDb.letter = letter.toLowerCase();
+    interaction.guild.members.me?.setNickname(
+      `${process.env.BOT_NAME} | ${letter.toUpperCase()}`,
       "Letter change."
     );
     interaction.reply({
@@ -38,3 +43,5 @@ module.exports = {
     guildDb.save();
   },
 };
+
+export default LetterCommand;
