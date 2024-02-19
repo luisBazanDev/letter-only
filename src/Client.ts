@@ -1,5 +1,6 @@
 import fs from "fs";
-import Guild, { GuildSchema } from "./models/guilds";
+import Guild from "./models/guilds";
+import { join as joinPath } from "path";
 import { Client, Collection, Intents } from "discord.js";
 import { Bot } from "./types";
 
@@ -17,15 +18,18 @@ const client: Bot = new Client({
 client.commands = new Collection();
 
 (async () => {
-  const EventsFiles = fs.readdirSync(__dirname + "/events/");
+  const EventsFiles = fs.readdirSync(joinPath(__dirname + "/events/"));
   for (const eventFile of EventsFiles) {
-    const event = require("./events/" + eventFile);
+    const event = require("./events/" + eventFile)?.default;
     client.on(event.name, (...args: [string]) => event.run(client, ...args));
   }
 
   const CommandsFiles = fs.readdirSync(__dirname + "/commands/");
   for (const commandFile of CommandsFiles) {
-    const command = require("./commands/" + commandFile);
+    let command = require("./commands/" + commandFile);
+    if (command.default) {
+      command = command.default;
+    }
     if (command.load) {
       command.load(client);
     }

@@ -1,15 +1,26 @@
-import { Client, Interaction, Options } from "discord.js";
+import {
+  CacheType,
+  CommandInteraction,
+  Interaction,
+  Options,
+} from "discord.js";
 import { Lang } from "./Lang";
+import { Bot } from "./Bot";
+
+export enum CommandPermission {
+  ADMIN,
+  USER,
+}
 
 export interface Command {
   name: string;
   description: string;
-  permissions: ["admin", "user"];
-  options: [any];
+  permissions: CommandPermission;
+  options?: [any];
   run: (
-    client: Client,
+    client: Bot,
     lang: Lang,
-    interaction: Interaction,
+    interaction: CommandInteraction,
     options: Options
   ) => void | Promise<void>;
 }

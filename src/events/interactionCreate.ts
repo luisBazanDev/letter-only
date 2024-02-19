@@ -1,31 +1,31 @@
 import { Interaction } from "discord.js";
 import { ES, EN } from "../languages";
-import { Bot } from "../types";
+import { Bot, Command, CommandPermission, Event } from "../types";
 
 const langs = {
   1: ES,
   2: EN,
 };
 
-export default {
+const InteractionEvent: Event = {
   name: "interactionCreate",
   run: async (client: Bot, interaction: Interaction) => {
+    if (!interaction.isCommand()) return;
+
     if (!client.resolveGuildDb) return;
     if (!interaction.guild) return;
     if (!interaction.member) return;
     const guildDb = await client.resolveGuildDb(interaction.guild.id);
     const lang = langs[guildDb?.language || "EN"];
 
-    if (!interaction.isCommand()) return;
-
     const { commandName, options, memberPermissions } = interaction;
 
-    let cmd = client.commands?.get(commandName);
+    let cmd: Command | undefined = client.commands?.get(commandName);
 
     if (!cmd) return;
 
     if (
-      cmd.permissions.includes("admin") &&
+      cmd.permissions === CommandPermission.ADMIN &&
       !memberPermissions?.has("ADMINISTRATOR")
     ) {
       interaction.reply({
@@ -38,3 +38,5 @@ export default {
     cmd.run(client, lang, interaction, options.data);
   },
 };
+
+export default InteractionEvent;
