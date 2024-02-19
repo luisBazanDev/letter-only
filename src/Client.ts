@@ -1,6 +1,7 @@
 const { Client, Collection, Intents } = require("discord.js");
-const fs = require("fs");
-const Guilds = require("./models/guilds");
+const { HydratedDocument } = require("mongoose");
+import fs from "fs";
+import Guild from "./models/guilds";
 
 const client = new Client({
   intents: [
@@ -19,7 +20,7 @@ client.commands = new Collection();
   const EventsFiles = fs.readdirSync(__dirname + "/events/");
   for (const eventFile of EventsFiles) {
     const event = require("./events/" + eventFile);
-    client.on(event.name, (...args) => event.run(client, ...args));
+    client.on(event.name, (...args: [string]) => event.run(client, ...args));
   }
 
   const CommandsFiles = fs.readdirSync(__dirname + "/commands/");
@@ -32,12 +33,12 @@ client.commands = new Collection();
   }
 })();
 
-client.resolveGuildDb = async (guild_id) => {
-  let guildDb = await Guilds.findOne({
+client.resolveGuildDb = async (guild_id: string) => {
+  let guildDb = await Guild.findOne({
     guild_id: guild_id,
   });
   if (!guildDb) {
-    guildDb = new Guilds({
+    guildDb = new Guild({
       guild_id,
     });
     await guildDb.save();
@@ -45,4 +46,4 @@ client.resolveGuildDb = async (guild_id) => {
   return guildDb;
 };
 
-module.exports = client;
+export default client;

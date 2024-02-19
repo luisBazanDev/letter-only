@@ -1,10 +1,10 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
 
-const client = require("./Client");
-const database = require("./DataBase");
-const tasks = require("./Tasks");
+import client from "./Client";
+import { connect as connectDatabase } from "./DataBase";
+// const tasks = require("./Tasks");
 
-database.connect();
-tasks.run();
-client.login(process.env.TOKEN);
+connectDatabase();
+// tasks.run();
+client.login(process.env.TOKEN ?? "");
