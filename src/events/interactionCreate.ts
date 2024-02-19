@@ -1,4 +1,8 @@
-import { Interaction } from "discord.js";
+import {
+  CommandInteraction,
+  CommandInteractionOption,
+  Interaction,
+} from "discord.js";
 import { ES, EN } from "../languages";
 import { Bot, Command, CommandPermission, Event } from "../types";
 
@@ -35,7 +39,12 @@ const InteractionEvent: Event = {
       return;
     }
 
-    cmd.run(client, lang, interaction, options.data);
+    cmd.run(
+      client,
+      lang,
+      interaction,
+      options.data as [CommandInteractionOption]
+    );
   },
 };
 

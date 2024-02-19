@@ -1,6 +1,7 @@
 import {
   CacheType,
   CommandInteraction,
+  CommandInteractionOption,
   Interaction,
   Options,
 } from "discord.js";
@@ -21,6 +22,6 @@ export interface Command {
     client: Bot,
     lang: Lang,
     interaction: CommandInteraction,
-    options: Options
+    options: [CommandInteractionOption]
   ) => void | Promise<void>;
 }
