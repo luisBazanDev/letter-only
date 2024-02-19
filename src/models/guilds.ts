@@ -1,17 +1,6 @@
 import { Schema, model } from "mongoose";
 
-interface Guild {
-  guild_id: string;
-  language: string;
-  letter: string;
-  muted_role: string;
-  membersMuted: [string];
-  state: boolean;
-  start_time: Date;
-  end_time: Date;
-}
-
-const schema = new Schema<Guild>({
+const schema = new Schema<GuildSchema>({
   guild_id: { type: String },
   language: {
     type: String,
@@ -44,4 +33,13 @@ const schema = new Schema<Guild>({
 });
 
 export default model("Guilds", schema);
-export const GuildSchema = schema;
+export interface GuildSchema {
+  guild_id: string;
+  language: string;
+  letter: string;
+  muted_role: string;
+  membersMuted: [string];
+  state: boolean;
+  start_time: Date;
+  end_time: Date;
+}

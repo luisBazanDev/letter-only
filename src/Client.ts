@@ -1,9 +1,9 @@
-const { Client, Collection, Intents } = require("discord.js");
-const { HydratedDocument } = require("mongoose");
 import fs from "fs";
-import Guild from "./models/guilds";
+import Guild, { GuildSchema } from "./models/guilds";
+import { Client, Collection, Intents } from "discord.js";
+import { Bot } from "./types";
 
-const client = new Client({
+const client: Bot = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MEMBERS,
@@ -29,7 +29,7 @@ client.commands = new Collection();
     if (command.load) {
       command.load(client);
     }
-    client.commands.set(command.name, command);
+    client.commands?.set(command.name, command);
   }
 })();
 
