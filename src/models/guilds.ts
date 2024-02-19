@@ -1,10 +1,11 @@
 import { Schema, model } from "mongoose";
+import { Langs } from "../types";
 
 const schema = new Schema<GuildSchema>({
   guild_id: { type: String },
   language: {
-    type: String,
-    default: "EN",
+    type: Number,
+    default: Langs.EN,
   },
   letter: {
     type: String,
@@ -35,7 +36,7 @@ const schema = new Schema<GuildSchema>({
 export default model("Guilds", schema);
 export interface GuildSchema {
   guild_id: string;
-  language: string;
+  language: Langs;
   letter: string;
   muted_role: string;
   membersMuted: [string];

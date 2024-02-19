@@ -1,3 +1,8 @@
+export enum Langs {
+  ES = 1,
+  EN = 2,
+}
+
 export interface Lang {
   warning: string;
   timeout: string;
