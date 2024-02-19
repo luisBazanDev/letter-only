@@ -1,7 +1,9 @@
-module.exports = {
+import { Command, CommandPermission, Langs } from "../types";
+
+const LangCommand: Command = {
   name: "lang",
   description: "🌐 Change the language of the bot.",
-  permissions: ["admin"],
+  permissions: CommandPermission.ADMIN,
   options: [
     {
       name: "language",
@@ -21,9 +23,17 @@ module.exports = {
     },
   ],
   run: async (client, lang, interaction, options) => {
+    if (!client.resolveGuildDb || !interaction.guild) return;
+
     const guildDb = await client.resolveGuildDb(interaction.guild.id);
     const cmdLang = lang.commands.language;
-    guildDb.language = options[0].value;
+
+    const newLang: Langs =
+      typeof options[0].value === "string"
+        ? Langs[options[0].value as keyof typeof Langs]
+        : Langs.EN;
+
+    guildDb.language = newLang;
     interaction.reply({
       content: cmdLang + "`" + options[0].value + "`",
       ephemeral: true,
@@ -31,3 +41,5 @@ module.exports = {
     guildDb.save();
   },
 };
+
+export default LangCommand;

@@ -1,16 +1,18 @@
+import { Command, CommandPermission } from "../types";
+
 const { MessageEmbed } = require("discord.js");
 
-module.exports = {
+const InfoCommand: Command = {
   name: "info",
   description: "📄 Bot information, and owner information",
-  permissions: [],
+  permissions: CommandPermission.USER,
   run: async (client, lang, interaction, options) => {
     const cmdLang = lang.commands.info;
     const embed = new MessageEmbed()
       .setColor("#00aeef")
       .setTitle(cmdLang.title + ` | ${process.env.BOT_NAME}`)
       .setDescription(cmdLang.description)
-      .setThumbnail(client.user.displayAvatarURL())
+      .setThumbnail(client.user?.displayAvatarURL())
       .setImage(cmdLang.img)
       .addField(cmdLang.creator.title, cmdLang.creator.value, true)
       .addField(cmdLang.created.title, cmdLang.created.value, true)
@@ -35,3 +37,5 @@ module.exports = {
     });
   },
 };
+
+export default InfoCommand;

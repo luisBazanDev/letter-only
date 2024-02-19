@@ -1,28 +1,35 @@
+import { GuildMember, Message } from "discord.js";
+import { Bot, Lang, Langs } from "../types";
+
 const MemberWarns = require("../models/members_warns");
+import { ES, EN } from "../languages";
 const langs = {
-  ES: require("../languages/ES.json"),
-  EN: require("../languages/EN.json"),
+  1: ES,
+  2: EN,
 };
 
-module.exports = {
+export default {
   name: "messageCreate",
-  run: async (client, msg) => {
-    if (msg.author.id == client.user.id && msg.type == "DEFAULT") {
+  run: async (client: Bot, msg: Message) => {
+    if (!client.resolveGuildDb) return;
+    if (msg.author.id == client.user?.id && msg.type == "DEFAULT") {
       setTimeout(() => {
         msg.delete();
       }, 1000 * 5);
       return;
     }
     if (msg.author.bot || msg.type != "DEFAULT") return;
+    if (!msg.guild?.id) return;
     const guildDb = await client.resolveGuildDb(msg.guild.id);
     if (!guildDb.state) return;
-    const lang = langs[guildDb.language || "EN"];
+    const lang: Lang = langs[guildDb.language] ?? EN;
     const content = msg.content.toLowerCase();
 
     if (compareMsgLetter(content.toLowerCase(), guildDb.letter.toLowerCase()))
       return;
 
     msg.delete();
+    if (!msg.member) return;
     if (msg.member.permissions.has("ADMINISTRATOR")) return;
     const warns = await warnUser(msg.guild.id, msg.member);
     if (!warns) {
@@ -42,7 +49,7 @@ module.exports = {
   },
 };
 
-async function resolveMemberWarns(guild_id, member_id) {
+async function resolveMemberWarns(guild_id: string, member_id: string) {
   let memberWarnsDb = await MemberWarns.findOne({
     guild_id,
     member_id,
@@ -57,11 +64,12 @@ async function resolveMemberWarns(guild_id, member_id) {
   }
   return memberWarnsDb;
 }
-async function warnUser(guild_id, member) {
+async function warnUser(guild_id: string, member: GuildMember) {
   const memberWarnsDb = await resolveMemberWarns(guild_id, member.id);
   if (memberWarnsDb.warns.length >= 3) {
     memberWarnsDb.warns = [];
-    member.timeout(1000 * process.env.TIMEOUT, "3 warns");
+    const TIMEOUT: number = parseInt(process.env.TIMEOUT ?? "") ?? 300;
+    member.timeout(1000 * TIMEOUT, "3 warns");
     await memberWarnsDb.save();
     return false;
   }
@@ -70,7 +78,7 @@ async function warnUser(guild_id, member) {
   return memberWarnsDb.warns.length;
 }
 
-function compareMsgLetter(msg, letter) {
+function compareMsgLetter(msg: string, letter: string) {
   let length = msg.length;
   if (length > 1) {
     let prediction = "";
