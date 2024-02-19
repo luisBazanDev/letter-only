@@ -18,6 +18,7 @@ export interface Command {
   description: string;
   permissions: CommandPermission;
   options?: [any];
+  load?: (client: Bot) => void | Promise<void>;
   run: (
     client: Bot,
     lang: Lang,
