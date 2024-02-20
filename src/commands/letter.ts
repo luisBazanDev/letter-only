@@ -1,3 +1,4 @@
+import { BOT_NAME } from "../Config";
 import { Command, CommandPermission } from "../types";
 
 const LetterCommand: Command = {
@@ -28,7 +29,7 @@ const LetterCommand: Command = {
     }
     guildDb.letter = letter.toLowerCase();
     interaction.guild.members.me?.setNickname(
-      `${process.env.BOT_NAME} | ${letter.toUpperCase()}`,
+      `${BOT_NAME} | ${letter.toUpperCase()}`,
       "Letter change."
     );
     interaction.reply({

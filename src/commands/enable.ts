@@ -1,3 +1,4 @@
+import { BOT_NAME } from "../Config";
 import Guilds from "../models/guilds";
 import { Command, CommandPermission } from "../types";
 
@@ -27,7 +28,7 @@ const EnableCommand: Command = {
     guildDb.state = true;
     await guildDb.save();
     interaction.guild.members.me?.setNickname(
-      `${process.env.BOT_NAME} | ${guildDb.letter.toUpperCase()}`,
+      `${BOT_NAME} | ${guildDb.letter.toUpperCase()}`,
       "Letter change."
     );
     interaction.reply({
