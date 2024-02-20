@@ -1,3 +1,4 @@
+import { INVITE_URL } from "../Config";
 import { Command, CommandPermission } from "../types";
 
 const { MessageEmbed } = require("discord.js");
@@ -11,7 +12,7 @@ const InviteCommand: Command = {
     const embed = new MessageEmbed()
       .setThumbnail(client.user?.displayAvatarURL())
       .setColor("#00aeef")
-      .addField(cmdLang.title, cmdLang.value + `${process.env.INVITE_URL})`);
+      .addField(cmdLang.title, cmdLang.value + `${INVITE_URL})`);
     interaction.reply({
       embeds: [embed],
       ephemeral: true,

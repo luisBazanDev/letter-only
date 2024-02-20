@@ -3,6 +3,7 @@ import { Bot, Lang, Langs } from "../types";
 
 const MemberWarns = require("../models/members_warns");
 import { ES, EN } from "../languages";
+import { TIMEOUT } from "../Config";
 const langs = {
   1: ES,
   2: EN,
@@ -36,7 +37,7 @@ export default {
       msg.channel.send(
         lang.timeout
           .replace("%member%", `<@${msg.member.id}>`)
-          .replace("%time%", "`" + process.env.TIMEOUT + "`")
+          .replace("%time%", "`" + TIMEOUT + "`")
       );
       return;
     }
@@ -68,7 +69,6 @@ async function warnUser(guild_id: string, member: GuildMember) {
   const memberWarnsDb = await resolveMemberWarns(guild_id, member.id);
   if (memberWarnsDb.warns.length >= 3) {
     memberWarnsDb.warns = [];
-    const TIMEOUT: number = parseInt(process.env.TIMEOUT ?? "") ?? 300;
     member.timeout(1000 * TIMEOUT, "3 warns");
     await memberWarnsDb.save();
     return false;

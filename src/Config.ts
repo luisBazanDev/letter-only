@@ -2,10 +2,10 @@ import { configDotenv } from "dotenv";
 
 configDotenv();
 
-export const MONGO_URI = process.env.MONGO_URI;
-export const TOKEN = process.env.TOKEN;
+export const MONGO_URI = process.env.MONGO_URI ?? "";
+export const TOKEN = process.env.TOKEN ?? "";
 export const TIMEOUT = 300; // Seconds
-export const BOT_PERMISSIONS = 1099578764288; // https://discord.com/developers/docs/topics/permissions
+export const BOT_PERMISSIONS: bigint = BigInt(1099578764288); // https://discord.com/developers/docs/topics/permissions
 export const BOT_NAME = "Letter Only";
 export const INVITE_SUPPORT = "https://discord.gg/UhBaxpFv6f";
 export const INVITE_URL =

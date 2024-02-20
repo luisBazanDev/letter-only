@@ -1,3 +1,4 @@
+import { BOT_NAME, INVITE_SUPPORT, INVITE_URL, SOURCE_URL } from "../Config";
 import { Command, CommandPermission } from "../types";
 
 const { MessageEmbed } = require("discord.js");
@@ -10,7 +11,7 @@ const InfoCommand: Command = {
     const cmdLang = lang.commands.info;
     const embed = new MessageEmbed()
       .setColor("#00aeef")
-      .setTitle(cmdLang.title + ` | ${process.env.BOT_NAME}`)
+      .setTitle(cmdLang.title + ` | ${BOT_NAME}`)
       .setDescription(cmdLang.description)
       .setThumbnail(client.user?.displayAvatarURL())
       .setImage(cmdLang.img)
@@ -18,17 +19,17 @@ const InfoCommand: Command = {
       .addField(cmdLang.created.title, cmdLang.created.value, true)
       .addField(
         cmdLang.support.title,
-        cmdLang.support.value + process.env.INVITE_SUPPORT + ")",
+        cmdLang.support.value + INVITE_SUPPORT + ")",
         true
       )
       .addField(
         cmdLang.invite.title,
-        cmdLang.invite.value + process.env.INVITE_URL + ")",
+        cmdLang.invite.value + INVITE_URL + ")",
         true
       )
       .addField(
         cmdLang.source.title,
-        cmdLang.source.value + process.env.SOURCE_URL + ")",
+        cmdLang.source.value + SOURCE_URL + ")",
         true
       );
     interaction.reply({
