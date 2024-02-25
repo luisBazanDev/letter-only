@@ -1,5 +1,5 @@
 import {
-  ApplicationCommandData,
+  ApplicationCommandOptionData,
   CommandInteraction,
   CommandInteractionOption,
 } from "discord.js";
@@ -15,7 +15,7 @@ export interface Command {
   name: string;
   description: string;
   permissions: CommandPermission;
-  options?: [ApplicationCommandData];
+  options?: [ApplicationCommandOptionData];
   load?: (client: Bot) => void | Promise<void>;
   run: (
     client: Bot,
