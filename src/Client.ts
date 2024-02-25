@@ -1,10 +1,10 @@
 import fs from "fs";
-import Guild from "./models/guilds";
 import { join as joinPath } from "path";
-import { Client, Collection, Intents } from "discord.js";
+import { Intents } from "discord.js";
 import { Bot } from "./types";
+import Guilds from "./models/guilds";
 
-const client: Bot = new Client({
+const client: Bot = new Bot({
   intents: [
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MEMBERS,
@@ -14,8 +14,6 @@ const client: Bot = new Client({
     Intents.FLAGS.DIRECT_MESSAGE_TYPING,
   ],
 });
-
-client.commands = new Collection();
 
 (async () => {
   const EventsFiles = fs.readdirSync(joinPath(__dirname + "/events/"));
@@ -35,19 +33,19 @@ client.commands = new Collection();
     }
     client.commands?.set(command.name, command);
   }
-})();
 
-client.resolveGuildDb = async (guild_id: string) => {
-  let guildDb = await Guild.findOne({
-    guild_id: guild_id,
-  });
-  if (!guildDb) {
-    guildDb = new Guild({
-      guild_id,
+  client.resolveGuildDb = async (guild_id: string) => {
+    let guildDb = await Guilds.findOne({
+      guild_id: guild_id,
     });
-    await guildDb.save();
-  }
-  return guildDb;
-};
+    if (!guildDb) {
+      guildDb = new Guilds({
+        guild_id,
+      });
+      await guildDb.save();
+    }
+    return guildDb;
+  };
+})();
 
 export default client;
