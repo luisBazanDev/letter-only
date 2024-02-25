@@ -1,9 +1,7 @@
 import {
-  CacheType,
+  ApplicationCommandData,
   CommandInteraction,
   CommandInteractionOption,
-  Interaction,
-  Options,
 } from "discord.js";
 import { Lang } from "./Lang";
 import { Bot } from "./Bot";
@@ -17,7 +15,7 @@ export interface Command {
   name: string;
   description: string;
   permissions: CommandPermission;
-  options?: [any];
+  options?: [ApplicationCommandData];
   load?: (client: Bot) => void | Promise<void>;
   run: (
     client: Bot,
