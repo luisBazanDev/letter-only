@@ -1,8 +1,4 @@
-import {
-  CommandInteraction,
-  CommandInteractionOption,
-  Interaction,
-} from "discord.js";
+import { CommandInteractionOption, Interaction } from "discord.js";
 import { ES, EN } from "../languages";
 import { Bot, Command, CommandPermission, Event } from "../types";
 
