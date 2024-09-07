@@ -1,6 +1,6 @@
-import { configDotenv } from "dotenv";
+import { config } from "dotenv";
 
-configDotenv();
+config();
 
 export const MONGO_URI = process.env.MONGO_URI ?? "";
 export const TOKEN = process.env.TOKEN ?? "";
