@@ -1,3 +1,4 @@
+import { ApplicationCommandOptionType } from "discord.js";
 import { Binary } from "../languages";
 import { Command, CommandPermission } from "../types";
 var data = new Map();
@@ -8,7 +9,7 @@ const TranslateCommand: Command = {
   options: [
     {
       name: "text",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       description: "Introduce the text to translate.",
       required: true,
     },

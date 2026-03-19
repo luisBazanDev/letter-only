@@ -1,3 +1,4 @@
+import { ApplicationCommandOptionType } from "discord.js";
 import { Command, CommandPermission, Langs } from "../types";
 
 const LangCommand: Command = {
@@ -7,7 +8,7 @@ const LangCommand: Command = {
   options: [
     {
       name: "language",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       description: "The language to change to.",
       required: true,
       choices: [

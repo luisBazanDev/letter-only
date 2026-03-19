@@ -1,4 +1,4 @@
-import { CommandInteractionOption, Interaction } from "discord.js";
+import { CommandInteractionOption, Interaction, PermissionFlagsBits } from "discord.js";
 import { ES, EN } from "../languages";
 import { Bot, Command, CommandPermission, Event } from "../types";
 
@@ -10,13 +10,13 @@ const langs = {
 const InteractionEvent: Event = {
   name: "interactionCreate",
   run: async (client: Bot, interaction: Interaction) => {
-    if (!interaction.isCommand()) return;
+    if (!interaction.isChatInputCommand()) return;
 
     if (!client.resolveGuildDb) return;
     if (!interaction.guild) return;
     if (!interaction.member) return;
     const guildDb = await client.resolveGuildDb(interaction.guild.id);
-    const lang = langs[guildDb?.language || "EN"];
+    const lang = (langs as any)[guildDb?.language || "EN"];
 
     const { commandName, options, memberPermissions } = interaction;
 
@@ -26,7 +26,7 @@ const InteractionEvent: Event = {
 
     if (
       cmd.permissions === CommandPermission.ADMIN &&
-      !memberPermissions?.has("ADMINISTRATOR")
+      !memberPermissions?.has(PermissionFlagsBits.Administrator)
     ) {
       interaction.reply({
         content: lang.commands.dont_permission,
@@ -39,7 +39,7 @@ const InteractionEvent: Event = {
       client,
       lang,
       interaction,
-      options.data as [CommandInteractionOption]
+      options.data as CommandInteractionOption[]
     );
   },
 };

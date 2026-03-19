@@ -1,7 +1,8 @@
 import {
   ApplicationCommandOptionData,
-  CommandInteraction,
+  ChatInputCommandInteraction,
   CommandInteractionOption,
+  ApplicationCommandOptionType
 } from "discord.js";
 import { Lang } from "./Lang";
 import { Bot } from "./Bot";
@@ -15,12 +16,12 @@ export interface Command {
   name: string;
   description: string;
   permissions: CommandPermission;
-  options?: [ApplicationCommandOptionData];
+  options?: ApplicationCommandOptionData[];
   load?: (client: Bot) => void | Promise<void>;
   run: (
     client: Bot,
     lang: Lang,
-    interaction: CommandInteraction,
-    options: [CommandInteractionOption]
+    interaction: ChatInputCommandInteraction,
+    options: readonly CommandInteractionOption[]
   ) => void | Promise<void>;
 }

@@ -1,4 +1,4 @@
-import { GuildMember, Message } from "discord.js";
+import { GuildMember, Message, MessageType, PermissionFlagsBits, TextChannel } from "discord.js";
 import { Bot, Lang, Langs } from "../types";
 
 const MemberWarns = require("../models/members_warns");
@@ -13,17 +13,17 @@ export default {
   name: "messageCreate",
   run: async (client: Bot, msg: Message) => {
     if (!client.resolveGuildDb) return;
-    if (msg.author.id == client.user?.id && msg.type == "DEFAULT") {
+    if (msg.author.id == client.user?.id && msg.type == MessageType.Default) {
       setTimeout(() => {
         msg.delete();
       }, 1000 * 5);
       return;
     }
-    if (msg.author.bot || msg.type != "DEFAULT") return;
+    if (msg.author.bot || msg.type != MessageType.Default) return;
     if (!msg.guild?.id) return;
     const guildDb = await client.resolveGuildDb(msg.guild.id);
     if (!guildDb.state) return;
-    const lang: Lang = langs[guildDb.language] ?? EN;
+    const lang: Lang = (langs as any)[guildDb.language] ?? EN;
     const content = msg.content.toLowerCase();
 
     if (compareMsgLetter(content.toLowerCase(), guildDb.letter.toLowerCase()))
@@ -31,22 +31,26 @@ export default {
 
     msg.delete();
     if (!msg.member) return;
-    if (msg.member.permissions.has("ADMINISTRATOR")) return;
+    if (msg.member.permissions.has(PermissionFlagsBits.Administrator)) return;
     const warns = await warnUser(msg.guild.id, msg.member);
     if (!warns) {
-      msg.channel.send(
-        lang.timeout
-          .replace("%member%", `<@${msg.member.id}>`)
-          .replace("%time%", "`" + TIMEOUT + "`")
-      );
+      if (msg.channel instanceof TextChannel) {
+        msg.channel.send(
+          lang.timeout
+            .replace("%member%", `<@${msg.member.id}>`)
+            .replace("%time%", "`" + TIMEOUT + "`")
+        );
+      }
       return;
     }
-    msg.channel.send(
-      lang.warning
-        .replace("%member%", `<@${msg.member.id}>`)
-        .replace("%letter%", guildDb.letter)
-        .replace("%warns%", "`" + warns + "/3`")
-    );
+    if (msg.channel instanceof TextChannel) {
+      msg.channel.send(
+        lang.warning
+          .replace("%member%", `<@${msg.member.id}>`)
+          .replace("%letter%", guildDb.letter)
+          .replace("%warns%", "`" + warns + "/3`")
+      );
+    }
   },
 };
 

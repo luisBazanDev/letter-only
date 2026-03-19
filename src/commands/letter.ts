@@ -1,3 +1,4 @@
+import { ApplicationCommandOptionType } from "discord.js";
 import { BOT_NAME } from "../Config";
 import { Command, CommandPermission } from "../types";
 
@@ -8,7 +9,7 @@ const LetterCommand: Command = {
   options: [
     {
       name: "letter",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       description: "The letter change to.",
       required: true,
     },

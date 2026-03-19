@@ -1,3 +1,4 @@
+import { ApplicationCommandOptionType } from "discord.js";
 import { BOT_NAME } from "../Config";
 import Guilds from "../models/guilds";
 import { Command, CommandPermission } from "../types";
@@ -10,7 +11,7 @@ const EnableCommand: Command = {
     {
       name: "duration",
       description: "Duration of the system. Default 1 hour",
-      type: "INTEGER",
+      type: ApplicationCommandOptionType.Integer,
       minValue: 1,
       maxValue: 48,
     },

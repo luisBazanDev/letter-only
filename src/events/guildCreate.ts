@@ -1,4 +1,4 @@
-import { Guild, Permissions } from "discord.js";
+import { Guild, PermissionFlagsBits } from "discord.js";
 import { Bot } from "../types";
 import { BOT_PERMISSIONS } from "../Config";
 
@@ -7,7 +7,7 @@ export default {
   run: async (client: Bot, guild: Guild) => {
     if (!client.resolveGuildDb) return;
     if (
-      !guild.members.me?.permissions.has(Permissions.resolve(BOT_PERMISSIONS))
+      !guild.members.me?.permissions.has(BigInt(BOT_PERMISSIONS))
     ) {
       const owner = await guild.fetchOwner();
       await owner?.send(
